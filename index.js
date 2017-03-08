@@ -3,7 +3,14 @@
   const FIELD_FREE = -2
   const FIELD_BLOCKED = -1
 
-  function NsMasonry( {containerId, colWidth, rowHeight, invertX, invertY, animate} ) {
+  function NsMasonry( opts ) {
+    let containerId = opts.containerId
+    let colWidth = opts.colWidth
+    let rowHeight = opts.rowHeight
+    let invertX = opts.invertX
+    let invertY = opts.invertY
+    let animate = opts.animate
+    let autoResize = opts.autoResize
     if (!containerId || !colWidth || !rowHeight) throw new Error('call with {containerId, colWidth, rowHeight}');
     const self = this
     self.update = update
@@ -17,6 +24,7 @@
     return self
 
     function update() {
+      console.log('updating')
       const containerWidth = container.clientWidth
       const columnCount = Math.floor(containerWidth / colWidth);
       let items, grid
@@ -51,7 +59,6 @@
               let hOffset = iC * colWidth
               item.style[vProperty] = vOffset + 'px'
               item.style[hProperty] = hOffset + 'px'
-              console.log('setting ' + field + ' to ' + vOffset + ', ' + hOffset)
             }
           }
         }
@@ -62,10 +69,15 @@
     function init() {
       vProperty = invertY ? 'bottom' : 'top'
       hProperty = invertX ? 'right' : 'left'
-      let items = container.children
-      for (let i = 0; i < items.length; i++) {
-        if (animate && items[i].style) {
-          items[i].style[vProperty] = $(window).height() + 'px'
+      if (autoResize) {
+        $(window).on('resize', update)
+      }
+      if (animate) {
+        let items = container.children
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].style) {
+            items[i].style[vProperty] = $(window).height() + 'px'
+          }
         }
       }
       update()
