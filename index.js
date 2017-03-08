@@ -24,16 +24,18 @@
     return self
 
     function update () {
+      // remove inline width style from container
+      if (container.style) container.style.width = ''
+      // calculate the count of columns
       const containerWidth = container.clientWidth
       const columnCount = Math.floor(containerWidth / colWidth)
+      // set container width to suit the amount of columns
+      container.style.width = columnCount * colWidth + 'px'
       let items, grid
       grid = createGrid({columnCount})
       items = container.children
       for (let i = 0; i < items.length; i++) {
         let element, width, height
-
-        // remove element width style we might have set to prevent overflow
-        if (items[i].style) items[i].style.width = ''
 
         width = items[i].offsetWidth
         height = items[i].offsetHeight
@@ -52,7 +54,6 @@
       if (layout.length === 0) return
       const height = layout.length
       const width = layout[0].length
-      const maxWidth = width * colWidth
       for (let iR = 0; iR < height; iR++) {
         for (let iC = 0; iC < width; iC++) {
           let field = layout[iR][iC]
@@ -61,10 +62,6 @@
             if (item && item.style) {
               item.style[vProperty] = iR * rowHeight + 'px'
               item.style[hProperty] = iC * colWidth + 'px'
-              if (item.offsetWidth >= maxWidth) {
-                // prevent images being wider than their container
-                item.style.width = maxWidth + 'px'
-              }
             }
           }
         }
