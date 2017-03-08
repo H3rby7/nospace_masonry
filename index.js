@@ -24,7 +24,6 @@
     return self
 
     function update() {
-      console.log('updating')
       const containerWidth = container.clientWidth
       const columnCount = Math.floor(containerWidth / colWidth);
       let items, grid
@@ -41,7 +40,7 @@
         }
         grid.fitElement(element)
       }
-      grid.printGrid()
+      //grid.printGrid()
       applyLayout( {layout: grid.getGrid(), items, container} )
     }
 
@@ -103,7 +102,6 @@
       }
       if (row + element.height > grid.length) {
         let rowsToAdd = row + element.height - grid.length
-        console.log('adding ' + rowsToAdd + 'rows');
         addRows(rowsToAdd)
       }
       placeElement( {element, row, col} )
