@@ -1,0 +1,9 @@
+.nospace_masonry_item {
+    max-width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.nospace_masonry_container {
+    position: relative;
+}

@@ -3,28 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Demo</title>
-  <link rel="stylesheet" href="basic.css" type="text/css">
+  <link rel="stylesheet" href="main.css" type="text/css">
+  <link rel="stylesheet" href="demo.css" type="text/css">
 </head>
 <body>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="index.js"></script>
 
-  <div class="nospace_masonry_container">
-    <div class="nospace_masonry_item width2 height2"
-         style="background-image: url('http://www.publicdomainpictures.net/pictures/100000/velka/two-dirty-boots.jpg')">
+
+  <div class="nospace_masonry_container" id="nsMasonry">
+    <div class="nospace_masonry_item width2 height3"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/20000/velka/surfer-girl.jpg')">
     </div>
     <div class="nospace_masonry_item height2"
          style="background-image: url('http://www.publicdomainpictures.net/pictures/10000/velka/thinking-monkey-11282237747K8xB.jpg')">
     </div>
-    <div class="nospace_masonry_item width2 height3"
-         style="background-image: url('http://www.publicdomainpictures.net/pictures/20000/velka/surfer-girl.jpg')">
-    </div>
     <div class="nospace_masonry_item"
          style="background-image: url('http://www.publicdomainpictures.net/pictures/60000/velka/paisley-wallpaper-pattern-colorful.jpg')">
+    </div>
+    <div class="nospace_masonry_item width2 height2"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/100000/velka/two-dirty-boots.jpg')">
     </div>
     <div class="nospace_masonry_item width3"
          style="background-image: url('http://www.publicdomainpictures.net/pictures/100000/velka/black-pawn.jpg')">
     </div>
+    <div class="nospace_masonry_item"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/90000/velka/-1397806576vq4.jpg')">
+    </div>
+    <div class="nospace_masonry_item"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/20000/velka/sky-lanterns-11295720077wiJ.jpg')">
+    </div>
+    <div class="nospace_masonry_item"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/60000/velka/la-dus.jpg')">
+    </div>
+    <div class="nospace_masonry_item"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/30000/velka/orchid-1341912543WTs.jpg')">
+    </div>
+    <div class="nospace_masonry_item"
+         style="background-image: url('http://www.publicdomainpictures.net/pictures/210000/velka/tiger-in-the-water-14812069667ks.jpg')">
+    </div>
   </div>
+
+<script type="application/ecmascript">
+  new NsMasonry( {containerId: 'nsMasonry', colWidth: 240, rowHeight: 180, animate: true} )</script>
 </body>
 </html>
