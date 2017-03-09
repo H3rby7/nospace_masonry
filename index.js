@@ -101,6 +101,7 @@
     }
 
     function fitElement (element) {
+      if (!element.width || !element.height) return
       let row, col
       for (row = 0; row <= grid.length; row++) {
         col = fitsInRow({row, element})
