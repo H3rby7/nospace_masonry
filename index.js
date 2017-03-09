@@ -18,6 +18,7 @@
 
     const self = this
     self.update = update
+    self.itemCount = 0
 
     init()
 
@@ -34,6 +35,7 @@
       let items, grid
       grid = createGrid({columnCount})
       items = container.children
+      self.itemCount = items.length
       for (let i = 0; i < items.length; i++) {
         let element, width, height
 
