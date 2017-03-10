@@ -31,6 +31,48 @@ body {
 
 .nospace_masonry_item.width2 { width: 480px; }
 .nospace_masonry_item.width3 { width: 720px; }
+.nospace_masonry_item.width4 { width: 960px; }
 
 .nospace_masonry_item.height2 { height: 360px; }
 .nospace_masonry_item.height3 { height: 540px; }
+.nospace_masonry_item.height4 { height: 720px; }
+
+.addImageOverlay {
+    position: fixed;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1em;
+    border-radius: 3px;
+    z-index: 50;
+    top: 20px;
+    left: 20px;
+}
+
+.addImageOverlay > * {
+    width: 100%;
+    height: 2.8em;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.addImageOverlay label {
+    font-size: 20px;
+    font-weight: 500;
+    float: left;
+    position: relative;
+    line-height: 2.8em;
+}
+
+.addImageOverlay > .row > * {
+    height: inherit;
+    width: 40%;
+}
+
+.addImageOverlay input,
+.addImageOverlay select {
+    float: right;
+    position: relative;
+    box-sizing: border-box;
+}

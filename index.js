@@ -6,7 +6,7 @@
 
   function NsMasonry (opts) {
     if (!opts || !opts.containerId || !opts.colWidth || !opts.rowHeight) throw new Error('call with {containerId, colWidth, rowHeight}')
-    let containerId = opts.containerId
+    const containerId = opts.containerId
     let colWidth = opts.colWidth
     let rowHeight = opts.rowHeight
     let vProperty = opts.invertY ? 'bottom' : 'top'
@@ -14,7 +14,12 @@
     let animate = opts.animate
     let autoResize = opts.autoResize
 
-    let container, lastContainerWidth
+    let container, cache
+
+    cache = {
+      width: null,
+      itemCount: null
+    }
 
     const self = this
     self.update = update
@@ -24,35 +29,39 @@
 
     return self
 
-    function update () {
-      // remove inline width style from container
+    function update (force) {
+      /* get Width as of now */
       if (container.style) container.style.width = ''
-      // calculate the count of columns
       const containerWidth = container.clientWidth
       const columnCount = Math.floor(containerWidth / colWidth)
-      // set container width to suit the amount of columns
-      let newWidth = columnCount * colWidth
-      if (lastContainerWidth === newWidth) return
-      lastContainerWidth = newWidth
-      container.style.width = newWidth + 'px'
-      let items, grid
-      grid = createGrid({columnCount})
-      items = container.children
-      self.itemCount = items.length
-      for (let i = 0; i < items.length; i++) {
-        let element, width, height
+      const newWidth = columnCount * colWidth
 
-        width = items[i].offsetWidth
-        height = items[i].offsetHeight
-        element = {
+      const items = $('#' + containerId).children()
+
+      /* abort conditions to save CPU */
+      if (!force && cache.width === newWidth && cache.itemCount === items.length) return false
+
+      cache.width = newWidth
+      container.style.width = newWidth + 'px'
+
+      self.itemCount = cache.itemCount = items.length
+
+      const grid = createGrid({columnCount})
+      fitItems({items, grid})
+      applyLayout({layout: grid.getGrid(), items, container})
+      // grid.printGrid()
+    }
+
+    function fitItems ({items, grid}) {
+      for (let i = 0; i < items.length; i++) {
+        const width = items[i].offsetWidth
+        const height = items[i].offsetHeight
+        grid.fitElement({
           width: Math.floor(width / colWidth),
           height: Math.floor(height / rowHeight),
           id: i
-        }
-        grid.fitElement(element)
+        })
       }
-      // grid.printGrid()
-      applyLayout({layout: grid.getGrid(), items, container})
     }
 
     function applyLayout ({layout, items, container}) {
