@@ -14,7 +14,7 @@
     let animate = opts.animate
     let autoResize = opts.autoResize
 
-    let container
+    let container, lastContainerWidth
 
     const self = this
     self.update = update
@@ -31,7 +31,10 @@
       const containerWidth = container.clientWidth
       const columnCount = Math.floor(containerWidth / colWidth)
       // set container width to suit the amount of columns
-      container.style.width = columnCount * colWidth + 'px'
+      let newWidth = columnCount * colWidth
+      if (lastContainerWidth === newWidth) return
+      lastContainerWidth = newWidth
+      container.style.width = newWidth + 'px'
       let items, grid
       grid = createGrid({columnCount})
       items = container.children
@@ -154,7 +157,7 @@
     function addRows (count) {
       if (count < 1) return
       for (let i = 0; i < count; i++) {
-        grid.push(Array(columnCount).fill(FIELD_FREE))
+        grid.push(new Array(columnCount).fill(FIELD_FREE))
       }
     }
 
